@@ -69,13 +69,13 @@ app.use('/', require('./routes/users'));
 app.use('/', require('./routes/cards'));
 
 app.use(errorLogger); // записываются все ошибки
-app.use(errors());
+app.use(errors()); // обработчик ошибок
 
 app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, next) => { // центролизованный обработчик ошибок
   if (err.statusCode) {
     res.status(err.statusCode).send({ message: err.message });
   }
