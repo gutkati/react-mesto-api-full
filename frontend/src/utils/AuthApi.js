@@ -8,7 +8,10 @@ class AuthApi {
         if (res.ok) {
             return res.json()
         }
-        return Promise.reject(res.status)
+        // return Promise.reject(res.status)
+        return res.json().then((data) => {
+            throw new Error(data.message)
+        })
 
     }
 
@@ -26,6 +29,7 @@ class AuthApi {
     login(password, email) {
         return fetch(`${this._baseUrl}/signin`, {
             method: "POST",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 password: password,
@@ -34,9 +38,17 @@ class AuthApi {
         }).then((res) => this._checkResponse(res));
     }
 
+    logout() {
+        return fetch(`${this._baseUrl}/logout`, {
+            credentials: 'include',
+            headers: this._headers,
+        }).then((res) => this._checkResponse(res));
+    }
+
     getUserData(jwt) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
@@ -46,7 +58,7 @@ class AuthApi {
 }
 
 export const authApi = new AuthApi({
-    baseUrl: "https://auth.nomoreparties.co",
+    baseUrl: "http://localhost:3001",
     headers: {
         "Content-Type": "application/json",
     },

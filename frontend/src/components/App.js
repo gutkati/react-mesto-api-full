@@ -40,18 +40,20 @@ function App() {
     }
 
     function goOutMain() {
+        authApi.logout()
+      .then((res) => console.log(res))
+      .catch(err => console.log(err))
         localStorage.removeItem("jwt")
         history.push("/signin")
     }
 
     function checkToken() {
-        const jwt = localStorage.getItem("jwt");
-        if (jwt) {
-            authApi.getUserData(jwt).then((data) => {
-                if (data) {
+
+            authApi.getUserData().then((res) => {
+                if (res) {
                     setLoggedIn(true);
                     history.push("/");
-                    setEmailUser(data.data.email);
+                    setEmailUser(res.email);
                 }
             })
                 .catch((err) => {
@@ -60,7 +62,7 @@ function App() {
                     }
                     console.log("401 - Переданный токен не корректен")
                 })
-        }
+
     }
 
     function handlePageLogin() {
@@ -91,14 +93,9 @@ function App() {
 
     function handleLogin(password, email) {
         authApi.login(password, email)
-            .then((data) => {
-                if (data.token) {
-                    localStorage.setItem("jwt", data.token);
-                    return data;
-                }
-            })
-            .then((data) => {
-                if (data.token) {
+
+            .then((res) => {
+                if (res) {
                     handlePageLogin();
                     history.push("/")
                 }
@@ -160,7 +157,7 @@ function App() {
     }
 
     function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
 
         api.changeStatusLike(card._id, !isLiked)
             .then((newCard) => {
@@ -272,10 +269,3 @@ function App() {
 }
 
 export default App;
-
-// {/*<PopupWithForm*/}
-//        {/*    name={'remove-card'}*/}
-//        {/*    title={'Вы уверены?'}*/}
-//        {/*    titleButton={'Да'}*/}
-//        {/*    isOpen={isImagePopupOpen}*/}
-//        {/*    onClose={closeAllPopups}/>*/}
