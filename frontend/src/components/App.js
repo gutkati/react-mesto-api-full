@@ -51,9 +51,10 @@ function App() {
 
             authApi.getUserData().then((res) => {
                 if (res) {
-                    setLoggedIn(true);
                     history.push("/");
+                    setLoggedIn(true);
                     setEmailUser(res.email);
+                    setCurrentUser(res);
                 }
             })
                 .catch((err) => {

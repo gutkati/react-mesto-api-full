@@ -31,10 +31,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(requestLogger); // записываются запросы и ответы
+
 app.use('*', cors(allowedCors));
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
+
+app.use(requestLogger); // записываются запросы и ответы
 
 app.get('/crash-test', () => {
   setTimeout(() => {

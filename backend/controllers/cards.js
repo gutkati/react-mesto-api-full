@@ -25,7 +25,7 @@ module.exports.createCard = (req, res, next) => {
   const id = req.user._id; // id пользователя взяли из мидлвэры в файле app.js
 
   Cards.create({ name, link, owner: id })
-    .then((card) => res.status(201).send({ card }))
+    .then((card) => res.status(201).send(card))
     .catch((err) => describeErrors(err, res, next));
 };
 

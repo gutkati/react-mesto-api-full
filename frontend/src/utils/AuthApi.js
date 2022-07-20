@@ -18,6 +18,7 @@ class AuthApi {
     registration(password, email) {
         return fetch(`${this._baseUrl}/signup`, {
             method: "POST",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 password: password,
