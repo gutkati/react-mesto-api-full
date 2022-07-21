@@ -15,8 +15,8 @@ export default function AddPlacePopup(props) {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();            // Запрещаем браузеру переходить по адресу формы
-        props.onAddPlace({          // Передаём значения управляемых компонентов во внешний обработчик
+        e.preventDefault(); // Запрещаем браузеру переходить по адресу формы
+        props.onAddPlace({ // Передаём значения управляемых компонентов во внешний обработчик
             name: cardName,
             link: cardLink
         });

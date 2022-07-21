@@ -38,10 +38,11 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : SECRET_KEY,
-        { expiresIn: '7d' });
+        { expiresIn: '7d' },
+      );
       res
         .cookie('jwt', token, {
-          httpOnly: true, sameSite: "none", secure: true, maxAge: 3600000 * 24 * 7
+          httpOnly: true, sameSite: 'none', secure: true, maxAge: 3600000 * 24 * 7,
         })
         .send({ message: 'Авторизация прошла успешно!' });
     })
@@ -51,11 +52,10 @@ module.exports.login = (req, res, next) => {
 module.exports.logout = (req, res) => {
   res
     .clearCookie('jwt', {
-    httpOnly: true, sameSite: "none", secure: true, maxAge: 3600000 * 24 * 7
-  })
+      httpOnly: true, sameSite: 'none', secure: true, maxAge: 3600000 * 24 * 7,
+    })
     .send({ message: 'куки удалены' });
 };
-
 
 module.exports.createUser = (req, res, next) => { // создать пользователя
   const {

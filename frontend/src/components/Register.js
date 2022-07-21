@@ -16,7 +16,7 @@ export default function Register(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.onRegister(password, email);          //вы усрешно зарегестрировались
+        props.onRegister(password, email); // вы усрешно зарегестрировались
     };
 
     return (

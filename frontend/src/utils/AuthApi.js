@@ -8,11 +8,10 @@ class AuthApi {
         if (res.ok) {
             return res.json()
         }
-        // return Promise.reject(res.status)
+
         return res.json().then((data) => {
             throw new Error(data.message)
         })
-
     }
 
     registration(password, email) {
