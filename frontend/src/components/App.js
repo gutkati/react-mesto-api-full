@@ -41,10 +41,13 @@ function App() {
 
     function goOutMain() {
         authApi.logout()
-      .then((res) => console.log(res))
+      .then((res) => {
+          setLoggedIn(false)
+          console.log(res)
+      })
       .catch(err => console.log(err))
-        localStorage.removeItem("jwt")
         history.push("/signin")
+
     }
 
     function checkToken() {

@@ -64,6 +64,8 @@ app.use((req, res, next) => {
 app.use(errorLogger); // записываются все ошибки
 app.use(errors()); // обработчик ошибок
 
+
+
 app.use((err, req, res, next) => { // центролизованный обработчик ошибок
   const { statusCode = 500, message } = err;
   res
