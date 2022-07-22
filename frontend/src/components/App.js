@@ -188,7 +188,6 @@ function App() {
                 .catch((err) => console.log(err));
         }
         checkToken()
-        setLoggedIn(true);
     }, [loggedIn]);
 
 
