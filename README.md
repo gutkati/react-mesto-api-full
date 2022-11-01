@@ -13,13 +13,16 @@
 
 ## Технологии для frontend:  
 
-
 - API REST  
 - JSX  
 - ReactDOM  
 - Функционалные компоненты  
 
-### Информация о сервере  
+### Запуск проекта
+
+npm run start - запускает сервер  
+npm run dev - запускает сервер с hot-reload  
+npm run start - запускает фронтенд  
 
 IP: 84.201.162.60  
 frontend: [https://practicum.mesto.nomoredomains.xyz]  
